@@ -1,6 +1,6 @@
 import discord
 import os
-
+import random
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -47,7 +47,9 @@ async def on_message(message):
 
     msg = message.content.lower().strip()
 
-
+    if msg.startswith('!who is your favorite player?'):
+        await message.channel.send(random.choice(list(career_scorers.keys())))
+      
     for player in career_scorers:
         if player in msg:
             await message.channel.send(f"{player.title()} has scored approximately {career_scorers[player]} goals in their career.")
